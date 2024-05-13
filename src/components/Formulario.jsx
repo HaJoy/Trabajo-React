@@ -8,12 +8,76 @@ const Formulario = () => {
     const [autor,setAutor] = React.useState('')
     const [editorial,setEditorial] = React.useState('')
     const [anio,setAnio] = React.useState('')
+    const [objetoI,setObjetoI] = React.useState('')
     const [lista,setLista] = React.useState([])
+
+
+    const validar = (option, i = -1) => {
+
+        //validar que el formulario este lleno
+        if(!nombre) {
+            alert('Falta el Nombre');
+            return false;
+        };
+        if(!apellido) {
+            alert('Falta el Apellido')
+            return false;
+        } 
+        if(!titulo) {
+            alert('Falta el titulo del libro')
+            return false;
+        } 
+        if(!autor) {
+            alert('Falta el autor del libro');
+            return false;
+        } 
+        if(!editorial) {
+            alert('Falta la editorial del libro');
+            return false;
+        } 
+        if(!anio) {
+            alert('Falta el año del libro');
+            return false;
+        }
+
+        //validar que no exista otro usuario con igual nombre
+        let arrayUsuario = lista.filter(user => 
+            user.nombre.toLowerCase() == nombre.toLowerCase() &&
+            user.apellido.toLowerCase() == apellido.toLowerCase()
+        );
+        let comparasion = lista.findIndex(user => 
+            user.nombre.toLowerCase() == nombre.toLowerCase() &&
+            user.apellido.toLowerCase() == apellido.toLowerCase()
+        );
+        if (option == 1) { //Si se está agregando, no debe haber otro nombre igual
+            if (arrayUsuario.length != 0) {
+                alert('Ya existe un usuario con ese nombre y apellido');
+                return false;
+            } 
+        }
+        if (option == 2) { //Si se esta editando el usuario puede dejar su mismo nombre pero no el de los demas
+            console.log(`${arrayUsuario.length} ${i}`);
+            if (arrayUsuario.length != 0 && comparasion != i) {
+                
+                alert('Ya existe un usuario con ese nombre y apellido');
+                return false;
+            } 
+        }
+        
+        
+
+        //validar que el año sea numerico
+        if (isNaN(anio)) {
+            alert('El año debe ser un numero entero');
+            return false;
+        }
+
+        return true;
+    }
     const guardarUsuario=(e) => {
         e.preventDefault()
         //validaciones
-        if(!nombre) return alert('Falta el Nombre')
-        if(!apellido) return alert('Falta el Apellido')
+        if (!validar(1)) return
         //agregando a la lista
         setLista([
             ...lista,
@@ -29,7 +93,9 @@ const Formulario = () => {
         setEditorial('')
         setAnio('')
     }
-    const editar = (nombre, apellido, titulo, autor, editorial, anio) => {
+    //let objetoI;
+    const abrirModal = (nombre, apellido, titulo, autor, editorial, anio) => {
+
         setNombre(nombre)
         setApellido(apellido)
         setTitulo(titulo)
@@ -37,14 +103,62 @@ const Formulario = () => {
         setEditorial(editorial)
         setAnio(anio)
 
+        let objeto = lista.findIndex(user => 
+            user.nombre.toLowerCase() == nombre.toLowerCase() &&
+            user.apellido.toLowerCase() == apellido.toLowerCase() &&
+            user.titulo.toLowerCase() == titulo.toLowerCase() &&
+            user.autor.toLowerCase() == autor.toLowerCase() &&
+            user.editorial.toLowerCase() == editorial.toLowerCase() &&
+            user.anio == anio
+        );
+        setObjetoI(objeto);
+        console.log(`abrirModal: ${objetoI}`);
+
         window.setTimeout(function(){
             document.getElementById('nombre').focus();
         })
     }
+    const editar = (e) => {
+        e.preventDefault();
+
+        //validaciones
+        if (!validar(2, objetoI)) return
+
+
+        let nuebaLista = lista;
+        // console.log(objetoI);
+        // console.log(nuebaLista[objetoI]);
+        nuebaLista[objetoI] = {nombre, apellido, titulo, autor, editorial, anio};
+        // console.log(nuebaLista[objetoI]);
+        
+        setLista(nuebaLista);
+
+        setNombre('')
+        setApellido('')
+        setTitulo('')
+        setAutor('')
+        setEditorial('')
+        setAnio('')
+    };
+    const eliminar = (nombre, apellido, titulo, autor, editorial, anio) => {
+
+        if (!confirm('¿Quiere eliminar este prestamo?')) return;
+
+        let objetivo = lista.findIndex(user => 
+            user.nombre.toLowerCase() == nombre.toLowerCase() &&
+            user.apellido.toLowerCase() == apellido.toLowerCase() &&
+            user.titulo.toLowerCase() == titulo.toLowerCase() &&
+            user.autor.toLowerCase() == autor.toLowerCase() &&
+            user.editorial.toLowerCase() == editorial.toLowerCase() &&
+            user.anio == anio
+        );
+
+        setLista(lista.filter(obj => lista.indexOf(obj) != objetivo));
+    }
   return (
     <div className='my-5'>
         <h2 className='my-3'>Formulario</h2>
-        <form onSubmit={guardarUsuario} className='my-3' data-bs-theme='dark'>
+        <form onSubmit={guardarUsuario} className='my-3 main-form' data-bs-theme='dark'>
             {/* <input type="text" 
             placeholder='Ingrese su Nombre'
             className='form-control mb-3'
@@ -131,11 +245,11 @@ const Formulario = () => {
                                     <td>{item.anio}</td>
                                     <td>
                                         <button className='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalEdit'
-                                        onClick={() => editar(item.nombre, item.apellido, item.titulo, item.autor, item.editorial, item.anio)}>
+                                        onClick={() => abrirModal(item.nombre, item.apellido, item.titulo, item.autor, item.editorial, item.anio)}>
                                             <i className='fa-solid fa-edit'/>
                                         </button>
                                         &nbsp;
-                                        <button className='btn btn-danger'>
+                                        <button className='btn btn-danger' onClick={() => eliminar(item.nombre, item.apellido, item.titulo, item.autor, item.editorial, item.anio)}>
                                             <i className='fa-solid fa-trash'/>
                                         </button>
                                     </td>
@@ -146,11 +260,11 @@ const Formulario = () => {
                 </table>
             </div>
         </div>
-        <div id='modalEdit' className='modal fade' aria-hidden='true'>
+        <div id='modalEdit' className='modal fade' aria-hidden='true' data-bs-theme='dark'>
             <div className='modal-dialog'>
                 <div className='modal-content'>
                     <div className='modal-header'>
-                        <label className='h5'>{titulo}</label>
+                        <label className='h5'>Editar prestamo</label>
                         <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'/>
                     </div>
                     <div className='modal-body'>
@@ -162,52 +276,74 @@ const Formulario = () => {
                             <input type="text" id='nombre' className='form-control' placeholder='Nombre' value={nombre}
                             onChange={(e)=>setNombre(e.target.value)}/>
                         </div> */}
-                        
-                        <input type='text'
-                        placeholder='Nombre' 
-                        aria-label='Nombre'
-                        className='form-control mb-3'
-                        value={nombre}
-                        onChange={(e) =>setNombre(e.target.value.trim())}
-                        />
-                        <input type='text' 
-                        placeholder='Apellido' 
-                        aria-label='Apellido'
-                        className='form-control mb-3'
-                        value={apellido}
-                        onChange={(e) =>setApellido(e.target.value.trim())}
-                        />
-                        <input type='text' 
-                        placeholder='Titulo' 
-                        aria-label='Titulo' 
-                        className='form-control mb-3'
-                        value={titulo}
-                        onChange={(e) =>setTitulo(e.target.value.trim())}
-                        />
-                        <input type='text'
-                        placeholder='Autor' 
-                        aria-label='Autor' 
-                        className='form-control mb-3'
-                        value={autor}
-                        onChange={(e) =>setAutor(e.target.value.trim())}
-                        />
-                        <input type='text' 
-                        placeholder='Editorial' 
-                        aria-label='Editorial' 
-                        className='form-control mb-3'
-                        value={editorial}
-                        onChange={(e) =>setEditorial(e.target.value.trim())}
-                        />
-                        <input type='text' 
-                        placeholder='Año' 
-                        aria-label='Anio' 
-                        className='form-control mb-3'
-                        value={anio}
-                        onChange={(e) =>setAnio(e.target.value.trim())}
-                        />
-                        <div className='d-grid gap-2'>
-                            <button className='btn btn-primary mb-3' type='submit'>Confirmar</button>
-                        </div>
+                        <form onSubmit={editar} data-bs-theme='dark'>
+                            <div className='input-group'>
+                                <span className='input-group-text mb-3'>Nombre</span>
+                                <input type='text'
+                                placeholder='Nombre' 
+                                aria-label='Nombre'
+                                id='nombre'
+                                className='form-control mb-3'
+                                value={nombre}
+                                onChange={(e) =>setNombre(e.target.value.trim())}
+                                />
+                            </div>
+                            <div className='input-group'>
+                                <span className='input-group-text mb-3'>Apellido</span>
+                                <input type='text' 
+                                placeholder='Apellido' 
+                                aria-label='Apellido'
+                                className='form-control mb-3'
+                                value={apellido}
+                                onChange={(e) =>setApellido(e.target.value.trim())}
+                                />
+                            </div>
+                            <div className='input-group'>
+                                <span className='input-group-text mb-3'>Titulo</span>
+                                <input type='text' 
+                                placeholder='Titulo' 
+                                aria-label='Titulo' 
+                                className='form-control mb-3'
+                                value={titulo}
+                                onChange={(e) =>setTitulo(e.target.value.trim())}
+                                />
+                            </div>
+                            
+                            <div className='input-group'>
+                                <span className='input-group-text mb-3'>Autor</span>
+                                <input type='text'
+                                placeholder='Autor' 
+                                aria-label='Autor' 
+                                className='form-control mb-3'
+                                value={autor}
+                                onChange={(e) =>setAutor(e.target.value.trim())}
+                                />
+                            </div>
+                            <div className='input-group'>
+                                <span className='input-group-text mb-3'>Editorial</span>
+                                <input type='text' 
+                                placeholder='Editorial' 
+                                aria-label='Editorial' 
+                                className='form-control mb-3'
+                                value={editorial}
+                                onChange={(e) =>setEditorial(e.target.value.trim())}
+                                />
+                            </div>
+                            <div className='input-group'>
+                                <span className='input-group-text mb-3'>Año</span>
+                                <input type='text' 
+                                placeholder='Año' 
+                                aria-label='Anio' 
+                                className='form-control mb-3'
+                                value={anio}
+                                onChange={(e) =>setAnio(e.target.value.trim())}
+                                />
+                            </div>
+                            
+                            <div className='d-grid gap-2'>
+                                <button className='btn btn-primary mb-3' type='submit' data-bs-dismiss='modal'>Confirmar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

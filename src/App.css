@@ -7,6 +7,6 @@ nav {
     background: linear-gradient(#40d0ff, #a05afa);
 }
 
-form {
+.main-form {
     border-bottom: 1px #555555 solid;
 }
