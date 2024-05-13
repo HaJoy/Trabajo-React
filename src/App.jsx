@@ -1,5 +1,6 @@
 
 import './App.css'
+import "@fortawesome/fontawesome-free/css/all.min.css"
 import Error from './components/Error'
 import Contacto from './components/Contacto'
 import Inicio from './components/Inicio'
@@ -13,6 +14,7 @@ import Quienessomos from './components/Quienessomos'
 import User from './components/User'
 import Formulario from './components/Formulario'
 import Header from './components/Header'
+
 
 function App() {
   
