@@ -15,9 +15,27 @@ const User = () => {
     }
   return (
     <div>
-        <h2>Datos del Empleado</h2>
-        <h3>{empleado.name}</h3>
-        <p>Website: {empleado.website} - Username: {empleado.username}</p>
+      <div className='container-fluid title my-2'>
+        <h1>Datos del Empleado</h1>
+      </div>
+      <div className="user-container">
+        <div className='user-card'>
+          <div className="user-card-head px-3">
+            <h3>{empleado.name}</h3>
+          </div>
+          <div className="user-card-info">
+            <div className="user-website">
+              <p><b>Website:</b> {empleado.website}</p>
+            </div>
+            <div className="user-usern">
+              <p><b>Username:</b> {empleado.username}</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+        
     </div>
   )
 }

@@ -15,8 +15,10 @@ const Quienessomos = () => {
     }
   return (
     <div className='mt-5'>
-        <h3>Lista de Empleados:</h3>
-        <ul className='list-group mt-3' data-bs-theme="dark">
+        <div className="container-fluid title">
+            <h1 className='my-3'>Lista de Empleados</h1>
+        </div>
+        <ul className='list-group mt-5' data-bs-theme="dark">
             {/*
                 lista.map((user)=>(<li 
                     className='list-group-item'

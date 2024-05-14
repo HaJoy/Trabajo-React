@@ -7,6 +7,138 @@ nav {
     background: linear-gradient(#40d0ff, #a05afa);
 }
 
+nav div {
+    max-width: 1232px;
+}
+
+.home-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px #313539 solid;
+    border-radius: 25px;
+    margin-top: 85px;
+}
+
+.img-container img {
+    border-radius: 15px;
+}
+
+.home-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    text-align: center;
+    border-bottom: 1px #555555 solid;
+}
+
 .main-form {
     border-bottom: 1px #555555 solid;
+}
+
+table td {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.buttons {
+    text-overflow: clip;
+}
+
+.msj-container {
+    border: 1px #313539 solid;
+    border-radius: 25px;
+    margin-top: 85px;
+    background-color: #263032;
+}
+
+.msj-body, .user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-container p {
+    margin: 0;
+}
+
+.user-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-card {
+    border: 1px #313539 solid;
+    border-radius: 25px;
+    margin-top: 85px;
+    background-color: #263032;
+    width: fit-content;
+}
+
+.user-card-head {
+    padding: 50px 0;
+}
+
+.user-card-info  div{
+    border-top: 1px #515559 solid;
+}
+
+.user-card-info  div p{
+    margin: 0;
+    padding: 15px 0;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+    background-color: #292929;
+    border-top: 1px #393939 solid;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 65px 0;
+    max-width: 1232px;
+}
+
+.brand-mark, .made-by {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.socials-icons {
+    font-size: 1.5em;
+}
+
+.socials-icons i {
+    color: #ffffff;
+}
+
+.made-by {
+    font-weight: bold;
+    font-size: 1.3em;
 }

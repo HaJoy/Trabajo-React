@@ -2,8 +2,8 @@ import React from 'react'
 
 const Imagen = ({urlimg}) => {
   return (
-    <div>
-        <img src={urlimg} alt="logo" />
+    <div className='mx-3'>
+        <img src={urlimg} alt="logo" className='img-fluid'/>
     </div>
   )
 }
