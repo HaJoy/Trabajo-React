@@ -18,12 +18,12 @@ const Quienessomos = () => {
         <div className="container-fluid title">
             <h1 className='my-3'>Lista de Empleados</h1>
         </div>
-        <ul className='list-group mt-5' data-bs-theme="dark">
-            {/*
+        {/* <ul className='list-group mt-5' data-bs-theme="dark">
+            
                 lista.map((user)=>(<li 
                     className='list-group-item'
                     key={user.id}>{user.name} - {user.email}</li>))
-                */}
+               
                 {
                     
                         lista.map((user)=>(<li 
@@ -32,7 +32,38 @@ const Quienessomos = () => {
                             <Link to={`/quienessomos/${user.id}`}>{user.name} - {user.email}</Link></li>))
                     
                 }
-        </ul>
+        </ul> */}
+        <div className='row mt-3'>
+            <div className='table-responsive'>
+                <table className='table table-hover' data-bs-theme='dark'>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                        </tr>
+                    </thead>
+                    <tbody className='table-group-divider'>
+                        {
+                            lista.map((user)=>(
+                                    <tr key={user.id}>
+                                        <td>
+                                            <Link to={`/quienessomos/${user.id}`}>
+                                               {user.name} 
+                                            </Link>
+                                        </td>
+                                        <td>
+                                            <Link to={`/quienessomos/${user.id}`}>
+                                                {user.email}
+                                            </Link>
+                                        </td> 
+                                        
+                                    </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
   )
 }
