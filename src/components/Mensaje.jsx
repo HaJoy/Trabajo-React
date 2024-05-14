@@ -1,8 +1,7 @@
 import React from 'react'
 import Imagen from './Imagen'
 
-const Mensaje = ({nombre = '',id = ''}) => {
-let url = 'https://emma.cuc.edu.co/static/media/logo_cuc.2cabedb7.png';
+const Mensaje = ({nombre = '',id = '', url = ''}) => {
   return (
     <div className='msj-container'>
         <div className="container-fluid title my-2">

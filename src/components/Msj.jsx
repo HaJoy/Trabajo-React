@@ -1,12 +1,10 @@
 import React from "react";
-import Imagen from "./Imagen"
 import Mensaje from "./Mensaje";
 
-
-const Msj = () => {
-  const [nombreMsj,setNombreMsj] = React.useState('Usuario')
-  const [idMsj,setIdMsj] = React.useState('(No definida aun)')
-  const [user,setUser] = React.useState([{nombreMsj, idMsj}])
+const Msj = ({nombre, id, url}) => {
+  const [nombreMsj,setNombreMsj] = React.useState('')
+  const [idMsj,setIdMsj] = React.useState('')
+  const [user,setUser] = React.useState([{username: nombre, userId: id}])
 
   const limpiar = () => {
     setNombreMsj('');
@@ -20,9 +18,9 @@ const Msj = () => {
     if (!idMsj) return alert('Falta el ID');
     if (isNaN(idMsj)) return alert('El ID debe ser un numero entero');
 
-    let nuebaLista = user;
-    nuebaLista[0] = {nombreMsj, idMsj};
-    setUser(nuebaLista);
+    let nuevaLista = user;
+    nuevaLista[0] = {username: nombreMsj, userId: idMsj};
+    setUser(nuevaLista);
 
     limpiar();
   }
@@ -30,7 +28,7 @@ const Msj = () => {
   return (
     <div className='mt-5'>
       
-      <Mensaje nombre={user[0].nombreMsj} id={user[0].idMsj} />
+      <Mensaje nombre={user[0].username} id={user[0].userId} url={url} />
       <div className="btn-container mt-5">
         <button className='btn btn-success' data-bs-toggle='modal' data-bs-target='#modalMsj'>
           <p><i className="fa-solid fa-plus mx-2"></i>Cambiar mensaje</p>

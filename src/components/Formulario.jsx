@@ -96,7 +96,6 @@ const Formulario = () => {
         //limpiar los estados
         limpiar();
     }
-    //let objetoI;
     const abrirModal = (nombre, apellido, titulo, autor, editorial, anio) => {
 
         setNombre(nombre)
@@ -128,13 +127,10 @@ const Formulario = () => {
         if (!validar(2, objetoI)) return
 
 
-        let nuebaLista = lista;
-        // console.log(objetoI);
-        // console.log(nuebaLista[objetoI]);
-        nuebaLista[objetoI] = {nombre, apellido, titulo, autor, editorial, anio};
-        // console.log(nuebaLista[objetoI]);
+        let nuevaLista = lista;
+        nuevaLista[objetoI] = {nombre, apellido, titulo, autor, editorial, anio};
         
-        setLista(nuebaLista);
+        setLista(nuevaLista);
 
         limpiar();
     };
@@ -155,7 +151,7 @@ const Formulario = () => {
     }
   return (
     <div className='my-5 row'>
-        <h2 className='my-3'>Prestamo de libros</h2>
+        <h2 className='my-3'>Préstamo de libros</h2>
         <form onSubmit={guardarUsuario} className='my-3 main-form col-lg-5' data-bs-theme='dark'>
             {/* <input type="text" 
             placeholder='Ingrese su Nombre'
@@ -213,11 +209,6 @@ const Formulario = () => {
                 <button className='btn btn-primary mb-3' type='submit'>Registrar</button>
             </div>
         </form>
-        {/* <ul className="my-3">
-            {
-                lista.map((item,index)=>(<li key={index}>{item.nombre} {item.apellido}</li>))
-            }
-        </ul> */}
         <div className='row mt-3 mt-md-1 col-lg-7'>
             <div className='table-responsive'>
                 <table className='table table-hover' data-bs-theme='dark'>
@@ -262,19 +253,12 @@ const Formulario = () => {
             <div className='modal-dialog'>
                 <div className='modal-content'>
                     <div className='modal-header'>
-                        <label className='h5'>Editar prestamo</label>
+                        <label className='h5'>Editar préstamo</label>
                         <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'
                         onClick={limpiar}/>
                     </div>
                     <div className='modal-body'>
                         <input type="hidden" id='id'/>
-                        {/* <div className='input-group mb-3'>
-                            <span className='input-group-text'>
-                                <i className='fa-solid fa-gift'/>
-                            </span>
-                            <input type="text" id='nombre' className='form-control' placeholder='Nombre' value={nombre}
-                            onChange={(e)=>setNombre(e.target.value)}/>
-                        </div> */}
                         <form onSubmit={editar} data-bs-theme='dark'>
                             <div className='input-group'>
                                 <span className='input-group-text mb-3'>Nombre</span>
