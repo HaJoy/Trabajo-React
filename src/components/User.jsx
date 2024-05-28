@@ -15,7 +15,7 @@ const User = () => {
     }
   return (
     <div>
-      <div className='container-fluid title my-2'>
+      <div className='container-fluid title my-5'>
         <h1>Datos del Empleado</h1>
       </div>
       <div className="user-container">
@@ -25,10 +25,10 @@ const User = () => {
           </div>
           <div className="user-card-info">
             <div className="user-website">
-              <p><b>Website:</b> {empleado.website}</p>
+              <p><i className='fa-solid fa-earth-americas me-2 fs-5' /> {empleado.website}</p>
             </div>
             <div className="user-usern">
-              <p><b>Username:</b> {empleado.username}</p>
+              <p><i className='fa-solid fa-user me-2 fs-5' /> {empleado.username}</p>
             </div>
           </div>
           

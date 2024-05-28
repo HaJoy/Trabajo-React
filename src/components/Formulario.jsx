@@ -153,17 +153,6 @@ const Formulario = () => {
     <div className='my-5 row'>
         <h2 className='my-3'>Préstamo de libros</h2>
         <form onSubmit={guardarUsuario} className='my-3 main-form col-lg-5' data-bs-theme='dark'>
-            {/* <input type="text" 
-            placeholder='Ingrese su Nombre'
-            className='form-control mb-3'
-            onChange={(e) =>setNombre(e.target.value.trim())}
-            />
-            <input type="text" 
-            placeholder='Ingrese su Apellido'
-            className='form-control mb-3'
-            onChange={(e) =>setApellido(e.target.value.trim())}
-            /> */}
-            
             <span className='input-group-text mb-3'>Ingrese su nombre</span>
             <input type='text'
             placeholder='Nombre' 
@@ -174,7 +163,7 @@ const Formulario = () => {
             <input type='text' 
             placeholder='Apellido' 
             aria-label='Apellido'
-            className='form-control mb-3'
+            className='form-control mb-5'
             onChange={(e) =>setApellido(e.target.value.trim())}
             />
         

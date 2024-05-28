@@ -64,6 +64,10 @@ table td {
     align-items: center;
 }
 
+.msj-body img {
+    border-radius: 25px;
+}
+
 .btn-container {
     display: flex;
     justify-content: center;
@@ -105,6 +109,37 @@ table td {
     margin: 0;
     padding: 15px 0;
 }
+
+.main-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    border: 1px #515559 solid;
+    border-radius: 25px;
+}
+
+.error-img-container {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/5514/5514029.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 290px;
+    height: 290px;
+    position: relative;
+}
+
+.error-img-container::after {
+    content: '';
+    height: 100%;
+    width: 100%;
+    background: inherit;
+    position: absolute;
+    filter: drop-shadow(0px 0px) blur(20px);
+    z-index: -1;
+}
+
+/*---------------- Footer ------------------*/
 
 .footer {
     display: flex;

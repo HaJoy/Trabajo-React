@@ -21,7 +21,7 @@ const Header = () => {
                 <Link to="/mensaje" className='nav-link fw-bolder'>Mensaje</Link>
               </li>
               <li className="nav-item mx-2">
-                <Link to="/formulario" className='nav-link fw-bolder'>Prestamos</Link>
+                <Link to="/formulario" className='nav-link fw-bolder'>Préstamos</Link>
               </li>
             </ul>
           </div>

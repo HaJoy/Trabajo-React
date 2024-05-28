@@ -15,8 +15,10 @@ const Msj = ({nombre, id, url}) => {
     setNombreMsj(nombreMsj);
     setIdMsj(idMsj);
     if (!nombreMsj) return alert('Falta el nombre');
+    if (nombreMsj.length > 30) return alert('El nombre es demasiado extenso');
     if (!idMsj) return alert('Falta el ID');
     if (isNaN(idMsj)) return alert('El ID debe ser un numero entero');
+    if (idMsj.length > 6) return alert('El ID no debe superar los 6 digitos');
 
     let nuevaLista = user;
     nuevaLista[0] = {username: nombreMsj, userId: idMsj};
@@ -53,6 +55,7 @@ const Msj = ({nombre, id, url}) => {
                                 aria-label='Nombre'
                                 id='nombre'
                                 className='form-control mb-3'
+                                value={nombreMsj}
                                 onChange={(e) =>setNombreMsj(e.target.value.trim())}
                                 />
                             </div>
@@ -62,6 +65,7 @@ const Msj = ({nombre, id, url}) => {
                                 placeholder='ID' 
                                 aria-label='ID'
                                 className='form-control mb-3'
+                                value={idMsj}
                                 onChange={(e) =>setIdMsj(e.target.value.trim())}
                                 />
                             </div>
